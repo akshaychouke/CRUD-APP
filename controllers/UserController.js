@@ -14,8 +14,7 @@ export const addUser = async (req, res) => {
   }
 };
 
-
-export const getAllUsers = async (req,res) =>{
+export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
     // console.log("users fetched successfully");
@@ -24,5 +23,28 @@ export const getAllUsers = async (req,res) =>{
     console.log("error in getAllUsers controller", error.message);
     res.status(409).json({ message: error.message });
   }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findOne({ _id: id });
+    res.status(200).json(user);
+  } catch (error) {
+    console.log("error in getUser singlecontroller", error.message);
+    res.status(409).json({ message: error.message });
+  }
+};
+
+export const editUser = async (req, res) => {
+  let user = req.body;
+  const editUserData = new User(user);
+  try {
+
+    await User.updateOne({_id: user._id}, editUserData);
+    res.status(200).json(`User ${editUserData.name} updated successfully`);
+  } catch (error) {
+    console.log("error in editUser controller", error.message);
+    res.status(409).json({ message: error.message });
+  }
 }
-  
