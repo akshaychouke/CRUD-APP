@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 //to import the getUsers api
-import { getUsers } from "../service/api";
+import { getUsers,deleteUserData} from "../service/api";
 
 //to style the table
 const StyleTable = styled(Table)({
@@ -46,6 +46,11 @@ const AllUsers = () => {
 
   const [users, setUsers] = useState([]);
 
+  //to delete the user
+  const deleteUser = async (id) => {
+    await deleteUserData(id);
+    getAllUsers();
+  }
   return (
     <StyleTable>
       <TableHead>
@@ -78,7 +83,7 @@ const AllUsers = () => {
               >
                 EDIT
               </Button>
-              <Button variant="contained" color="secondary">
+              <Button variant="contained" color="secondary" onClick={()=>deleteUser(user._id)}>
                 DELETE
               </Button>
             </TableCell>
