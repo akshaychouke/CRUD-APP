@@ -10,7 +10,6 @@ const Tabs = styled(NavLink)({
   color: "#FFFFFF",
   marginRight: "20px",
   textDecoration: "none",
-  fontSize: "20px",
 });
 const Navbar = () => {
   return (

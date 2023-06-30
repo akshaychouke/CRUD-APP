@@ -8,7 +8,7 @@ import {
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 //calling the api to add user
 import { addUser } from "../service/api";
 
@@ -28,7 +28,13 @@ const defaultUser = {
   phone: "",
 };
 const AddUser = () => {
+  //for navigation
+  const navigate = useNavigate();
+
+  //setting the default user
   const [user, setUser] = useState(defaultUser);
+
+  //when user changes the input value
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     // console.log(user);
@@ -39,6 +45,8 @@ const AddUser = () => {
     e.preventDefault();
     //sending the user data to the add user api
     await addUser(user);
+    //redirecting to the all users page
+    navigate("/all");
   };
   return (
     <Container>
