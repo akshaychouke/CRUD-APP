@@ -13,4 +13,16 @@ export const addUser = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+
+export const getAllUsers = async (req,res) =>{
+  try {
+    const users = await User.find({});
+    // console.log("users fetched successfully");
+    res.status(200).json(users);
+  } catch (error) {
+    console.log("error in getAllUsers controller", error.message);
+    res.status(409).json({ message: error.message });
+  }
+}
   
