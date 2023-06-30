@@ -8,7 +8,7 @@ import {
   TableRow,
   styled,
 } from "@mui/material";
-
+import { Link } from "react-router-dom";
 //to import the getUsers api
 import { getUsers } from "../service/api";
 
@@ -73,6 +73,8 @@ const AllUsers = () => {
                 variant="contained"
                 color="primary"
                 style={{ marginRight: "10px" }}
+                component={Link}
+                to={`/edit/${user._id}`}
               >
                 EDIT
               </Button>
