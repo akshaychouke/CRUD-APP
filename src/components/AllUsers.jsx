@@ -11,7 +11,8 @@ import {
 import { Link } from "react-router-dom";
 //to import the getUsers api
 import { getUsers,deleteUserData} from "../service/api";
-
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //to style the table
 const StyleTable = styled(Table)({
   width: "90%",
@@ -48,7 +49,10 @@ const AllUsers = () => {
 
   //to delete the user
   const deleteUser = async (id) => {
-    await deleteUserData(id);
+    const res = await deleteUserData(id);
+    if(res){
+      toast.success("user deleted successfully");
+    }
     getAllUsers();
   }
   return (

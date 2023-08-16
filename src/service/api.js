@@ -1,13 +1,18 @@
 import axios from "axios";
-
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const API_URL = "http://localhost:8000";
 
 //to add the user in the database
 export const addUser = async (data) => {
   try {
-    return await axios.post(`${API_URL}/add`, data);
+    const res = await axios.post(`${API_URL}/add`, data);
+    console.log(res.data);
+    return res;
+
   } catch (error) {
-    console.log("Error while adding user", error.message);
+    console.log("Error while adding user", error.response.data.message);
+    toast.error(error.response.data.message)
   }
 };
 
@@ -35,6 +40,7 @@ export const editUser = async (user, id) => {
     return await axios.put(`${API_URL}/${id}`, user);
   } catch (error) {
     console.log("Error while editing user", error.message);
+    toast.error(error.message)
   }
 };
 
@@ -44,5 +50,6 @@ export const deleteUserData = async (id) => {
     return await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
     console.log("Error while deleting user", error.message);
+    toast.error(error.message)
   }
 };

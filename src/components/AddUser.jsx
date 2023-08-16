@@ -7,6 +7,9 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //calling the api to add user
@@ -44,9 +47,12 @@ const AddUser = () => {
   const addUserDetails = async (e) => {
     e.preventDefault();
     //sending the user data to the add user api
-    await addUser(user);
-    //redirecting to the all users page
-    navigate("/all");
+    const res = await addUser(user);
+    if (res) {
+      toast.success("user added successfully");
+      //redirecting to the all users page
+      navigate("/all");
+    }
   };
   return (
     <Container>
@@ -72,6 +78,7 @@ const AddUser = () => {
           ADD USER
         </Button>
       </FormControl>
+      
     </Container>
   );
 };

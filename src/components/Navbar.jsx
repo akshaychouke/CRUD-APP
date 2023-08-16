@@ -16,7 +16,7 @@ const Navbar = () => {
     <>
       <Header style={{ position: "static" }}>
         <Toolbar>
-          <Tabs to="/">MyApp</Tabs>
+          <Tabs to="/">MYAPP</Tabs>
           <Tabs to="/all">ALL USERS</Tabs>
           <Tabs to="/add">ADD USER</Tabs>
         </Toolbar>

@@ -11,7 +11,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 //calling the api function
 import { getUser, editUser } from "../service/api";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Container = styled(FormGroup)({
   width: "50%",
   margin: "5% auto 0 auto",
@@ -47,9 +48,13 @@ const EditUser = () => {
   const editUserDetails = async (e) => {
     e.preventDefault();
     //sending the user data to the edit user api
-    await editUser(user, id);
-    //redirecting to the all users page
-    navigate("/all");
+    const res = await editUser(user, id);
+
+    if (res) {
+      toast.success("user updated successfully");
+      //redirecting to the all users page
+      navigate("/all");
+    }
   };
 
   useEffect(() => {
