@@ -3,6 +3,10 @@ import User from "../model/UserSchema.js";
 //to add a new user to the database
 export const addUser = async (req, res) => {
   const user = req.body;
+  console.log(req.body);
+  if(req.body.name == '' || req.body.email == '' || req.body.phone == '' || req.body.address == '' || req.body.password == ''){
+    return res.status(409).json({ message: "Please fill all the fields" });
+  }
   const newUser = new User(user);
 
   try {
